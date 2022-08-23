@@ -26,9 +26,9 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="univercity">Univercity</label>
-                                <input class="form-control" type="text" name="univercity" id="univercity">
-                                @error('univercity')
+                                <label for="education">Education</label>
+                                <input class="form-control" type="text" name="education" id="education">
+                                @error('education')
                                     <span class='text-danger'>{{$message}}</span>
                                 @enderror
                             </div>

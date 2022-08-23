@@ -27,8 +27,8 @@ class RegisterStoreRequest extends FormRequest
         return [
             'name'=>'bail|required|string',
             'email'=>'bail|required|email|unique:users',
-            'phone'=>'bail|required',
-            'univercity'=>'bail|required',
+            'phone'=>'bail|required|unique:users',
+            'education'=>'bail|required',
             'password'=>['bail','required','string','confirmed',Password::min(4)->mixedCase()],
         ];
     }

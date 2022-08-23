@@ -12,8 +12,8 @@
                         <form action="{{route('login.store')}}" method="post">
                         @csrf
                             <div class="mb-3">
-                                <label for="email">Email</label>
-                                <input class="form-control" type="email" name="email" id="email">
+                                <label for="email">Email or Phone Number</label>
+                                <input class="form-control" type="text" name="email" id="email">
                                 @error('email')
                                     <div class="text-danger">
                                         {{$message}}

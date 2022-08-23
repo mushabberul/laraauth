@@ -23,7 +23,7 @@ class CustomRegisterController extends Controller
             'name'=>$requert->name,
             'email'=>$requert->email,
             'phone'=>$requert->phone,
-            'univercity'=>$requert->univercity,
+            'education'=>$requert->education,
             'password'=>Hash::make( $requert->password),
         ]);
 
@@ -47,13 +47,18 @@ class CustomRegisterController extends Controller
     }
     public function showUser(LoginUserRequest $requert)
     {
-        $credantials = [
+        $credantials_for_email = [
             'email'=>$requert->email,
             'password'=>$requert->password,
         ];
-        if(Auth::attempt($credantials,$requert->filled('remember'))){
+        $credantials_for_phone = [
+            'phone'=>$requert->phone,
+            'password'=>$requert->password,
+        ];
+        if((Auth::attempt($credantials_for_email,$requert->filled('remember'))) || (Auth::attempt($credantials_for_phone,$requert->filled('remember')))){
             $requert->session()->regenerate();
-            return redirect()->intended('home');
+            // return redirect()->intended('home');
+            return 'if';
         }
         return back()->withErrors([
             'email'=>'This email is not register',
