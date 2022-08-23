@@ -23,6 +23,7 @@ class CustomRegisterController extends Controller
             'name'=>$requert->name,
             'email'=>$requert->email,
             'phone'=>$requert->phone,
+            'univercity'=>$requert->univercity,
             'password'=>Hash::make( $requert->password),
         ]);
 
