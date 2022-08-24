@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -37,9 +39,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        dd($request->all());
+        $file_exist = $request->hasFile('product_image');
+        if($file_exist){
+            $file = $request->file('product_image');
+            $file_type = $file->getClientMimeType();
+            $file_extention = $file->getClientOriginalExtension();
+            $file_name = $file->getClientOriginalName();
+
+
+           $file_path = Storage::disk('public')->put('product/image',$file);
+
+          dump( Storage::url($file_path));
+        }
     }
 
     /**
