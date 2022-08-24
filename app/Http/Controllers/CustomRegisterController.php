@@ -51,14 +51,10 @@ class CustomRegisterController extends Controller
             'email'=>$requert->email,
             'password'=>$requert->password,
         ];
-        $credantials_for_phone = [
-            'phone'=>$requert->phone,
-            'password'=>$requert->password,
-        ];
-        if((Auth::attempt($credantials_for_email,$requert->filled('remember'))) || (Auth::attempt($credantials_for_phone,$requert->filled('remember')))){
+
+        if(Auth::attempt($credantials_for_email,$requert->filled('remember'))){
             $requert->session()->regenerate();
-            // return redirect()->intended('home');
-            return 'if';
+            return redirect()->intended('home');
         }
         return back()->withErrors([
             'email'=>'This email is not register',

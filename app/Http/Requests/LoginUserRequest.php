@@ -25,7 +25,7 @@ class LoginUserRequest extends FormRequest
     {
         return [
             'email'=>'bail|string',
-            // 'phone'=>'bail|string|exists:users,phone',
+            // 'phone'=>'bail|string',
             'password'=>'bail|string',
         ];
     }
