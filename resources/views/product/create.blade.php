@@ -20,6 +20,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Create form <h3>
+                        <a href="{{route('products.index')}}" class="btn btn-info">Product List</a>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
@@ -53,8 +54,9 @@
                                 <textarea class="form-control" name="product_description" id="" cols="50" rows="6"></textarea>
                             </div>
                             <div class="mb-3">
+                                <img width="100px" height="100px" id="output" alt="" class="pb-1">
                                 <label for="formFile" class="form-label">Product Image</label>
-                                <input name="product_image" class="form-control" type="file" id="formFile">
+                                <input name="product_image" class="form-control" type="file" id="formFile" onchange="loadfile(event)">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -66,6 +68,13 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        let loadfile = function(event){
+            let output = document.getElementById("output")
+            output.src = URL.createObjectURL(event.target.files[0])
+            // alert(output.src)
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
