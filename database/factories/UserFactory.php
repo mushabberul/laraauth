@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Faker\Provider\ar_EG\Company;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -27,19 +26,5 @@ class UserFactory extends Factory
             'phone'=>fake()->phoneNumber(),
             'education'=>fake()->Company()
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return static
-     */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
     }
 }
