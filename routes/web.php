@@ -38,10 +38,11 @@ Route::middleware('auth')->group(function(){
     Route::post('logout',[CustomRegisterController::class,'logout'])->name('logout');
 });
 
-
-Route::resource('/products',ProductController::class);
-Route::get('/products/{product_id}/restore',[ProductController::class, 'restore'])->name('products.restore');
-Route::get('/products/{product_id}/forcedelete',[ProductController::class, 'forceDelete'])->name('products.forcedelete');
+Route::prefix('dashboard')->group(function(){
+    Route::resource('/products',ProductController::class);
+    Route::get('/products/{product_id}/restore',[ProductController::class, 'restore'])->name('products.restore');
+    Route::get('/products/{product_id}/forcedelete',[ProductController::class, 'forceDelete'])->name('products.forcedelete');
+});
 
 // Route::get('mail-preview',function(){
 //     $product = Product::find(7);
