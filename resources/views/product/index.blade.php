@@ -37,14 +37,14 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->description }}</td>
-                                {{--<td><img width="100px" height="100px" src="{{ asset('uploads/product/' . $product->image) }}" alt="Not Found" /></td>--}}
+                                <td><img width="100px" height="100px" src="{{ asset('uploads/product/' . $product->image) }}" alt="Not Found" /></td>
                                 <td>
                                     <a class="btn btn-primary" href="{{route('products.edit',['product'=>$product->id])}}">Edit</a>
                                     <a class="btn btn-info" href="{{route('products.show',['product'=>$product->id])}}">Show</a>
                                     <form class="d-inline" action="{{route('products.destroy',['product'=>$product->id])}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        <button class="btn btn-danger" id="sweet_alert" type="submit">Delete</button>
                                     </form>
                                 </td>
 
@@ -75,13 +75,14 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->description }}</td>
-                                {{--<td><img width="100px" height="100px" src="{{ asset('uploads/product/' . $product->image) }}" alt="Not Found" /></td>--}}
+                                <td><img width="100px" height="100px" src="{{ asset('uploads/product/' . $product->image) }}" alt="Not Found" /></td>
                                 <td>
                                     <a class="btn btn-info" href="{{route('products.restore',['product_id'=>$product->id])}}">Restore</a>
                                     <form class="d-inline" action="{{route('products.forcedelete',['product_id'=>$product->id])}}" method="post">
                                         @csrf
                                         @method('GET')
-                                        <button class="btn btn-danger" type="submit">Force Delete</button>
+
+                                        <button id="" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" class="btn btn-danger" type="submit">Force Delete</button>
                                     </form>
                                 </td>
 
@@ -93,6 +94,31 @@
         </div>
     </div>
   @include('product.script')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.29/dist/sweetalert2.all.min.js"></script>
+  <script>
+    $('#sweet_alert').click(function(event){
+        let form = $(this).closest('form')
+        event.preventDefault()
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            form.submit()
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+    })
+  </script>
 </body>
 
 </html>
