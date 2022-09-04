@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+   @include('product.style')
 </head>
 
 <body>
@@ -71,9 +70,9 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <img width="100px" height="100px" src="{{asset('uploads/product/'.$product->image)}}" id="output" alt="" class="pb-1">
+                                {{--<img width="100px" height="100px" src="{{asset('uploads/product/'.$product->image)}}" id="output" alt="" class="pb-1">--}}
                                 <label for="formFile" class="form-label">Product Image</label>
-                                <input name="product_image" class="form-control" type="file" id="formFile" onchange="loadfile(event)">
+                                <input name="product_image" class="form-control" type="file" id="formFile">
                                 @error('product_image')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -85,16 +84,14 @@
             </div>
         </div>
     </div>
-    <script>
+    {{--<script>
         let loadfile = function(event){
             let output = document.getElementById('output')
             output.src = URL.createObjectURL(event.target.files[0])
             // alert(output.src)
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
-    </script>
+    </script>--}}
+    @include('product.script')
 </body>
 
 </html>

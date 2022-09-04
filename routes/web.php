@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CustomRegisterController;
+use App\Models\Product;
+use App\Mail\ProductCreateMarkdown;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-use App\Mail\ProductCreateMarkdown;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+
+
 Route::get('/', function () {
+    Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+
     return view('welcome');
 });
-
 // Auth::routes();
 
 
@@ -38,7 +46,7 @@ Route::middleware('auth')->group(function(){
     Route::post('logout',[CustomRegisterController::class,'logout'])->name('logout');
 });
 
-Route::prefix('dashboard')->group(function(){
+Route::prefix('admin')->group(function(){
     Route::resource('/products',ProductController::class);
     Route::get('/products/{product_id}/restore',[ProductController::class, 'restore'])->name('products.restore');
     Route::get('/products/{product_id}/forcedelete',[ProductController::class, 'forceDelete'])->name('products.forcedelete');
